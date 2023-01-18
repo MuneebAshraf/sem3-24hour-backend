@@ -1,4 +1,4 @@
-# Sem3-CA2-backend-template
+# sem3-24exam-backend
 
 ### Getting Started
 
