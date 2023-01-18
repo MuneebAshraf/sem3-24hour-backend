@@ -1,7 +1,5 @@
 package security;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
 import javax.annotation.Priority;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -14,6 +12,8 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 @Provider
 @Priority(Priorities.AUTHORIZATION)

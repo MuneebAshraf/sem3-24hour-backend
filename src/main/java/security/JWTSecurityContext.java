@@ -1,18 +1,20 @@
 package security;
-import java.security.Principal;
+
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
+
 public class JWTSecurityContext implements SecurityContext {
-   UserPrincipal user;
+   AccountPrincipal accountPrincipal;
    ContainerRequestContext request;
 
-   public JWTSecurityContext(UserPrincipal user,ContainerRequestContext request) {
-       this.user = user;
+   public JWTSecurityContext(AccountPrincipal accountPrincipal, ContainerRequestContext request) {
+       this.accountPrincipal = accountPrincipal;
        this.request = request;
    }
    @Override
-   public boolean isUserInRole(String role) {
-       return user.isUserInRole(role);
+   public boolean isUserInRole(String permission) {
+       return accountPrincipal.hasPermission(Permission.valueOf(permission));
    }
    @Override
    public boolean isSecure() {
@@ -20,7 +22,7 @@ public class JWTSecurityContext implements SecurityContext {
    }
    @Override
    public Principal getUserPrincipal() {
-       return user;
+       return accountPrincipal;
    }
    @Override
    public String getAuthenticationScheme() {

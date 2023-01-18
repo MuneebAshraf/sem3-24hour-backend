@@ -1,92 +1,154 @@
 package entities;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-  private static final long serialVersionUID = 1L;
-  @Id
-  @Basic(optional = false)
-  @NotNull
-  @Column(name = "user_name", length = 25)
-  private String userName;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 255)
-  @Column(name = "user_pass")
-  private String userPass;
-  @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
-    @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-  @ManyToMany
-  private List<Role> roleList = new ArrayList<>();
+    @Column(name = "username", nullable = false)
+    private String username;
 
-  public List<String> getRolesAsStrings() {
-    if (roleList.isEmpty()) {
-      return null;
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "first_name", length = 45)
+    private String firstName;
+
+    @Column(name = "last_name", length = 45)
+    private String lastName;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "zip")
+    private Integer zip;
+
+    @Column(name = "city")
+    private String city;
+
+    @Lob
+    @Column(name = "Roles", nullable = false)
+    private String roles;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Walk> walks = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Dog> dogs = new LinkedHashSet<>();
+
+    //constructor and pasword with bcrypt
+    public User(String username, String password, String firstName, String lastName, String street, Integer zip, String city, String roles) {
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.zip = zip;
+        this.city = city;
+        this.roles = roles;
     }
-    List<String> rolesAsStrings = new ArrayList<>();
-    roleList.forEach((role) -> {
-        rolesAsStrings.add(role.getRoleName());
-      });
-    return rolesAsStrings;
-  }
 
-  public User() {}
-
-  //TODO Change when password is hashed
-   public boolean verifyPassword(String pw){
-        return BCrypt.checkpw(pw, userPass);
+    //emptry constructor
+    public User() {
     }
 
-  public User(String userName, String userPass) {
-    this.userName = userName;
+    public Set<Dog> getDogs() {
+        return dogs;
+    }
 
-    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-  }
+    public void setDogs(Set<Dog> dogs) {
+        this.dogs = dogs;
+    }
 
+    public Set<Walk> getWalks() {
+        return walks;
+    }
 
-  public String getUserName() {
-    return userName;
-  }
+    public void setWalks(Set<Walk> walks) {
+        this.walks = walks;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public String getRoles() {
+        return roles;
+    }
 
-  public String getUserPass() {
-    return this.userPass;
-  }
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
-  public void setUserPass(String userPass) {
-    this.userPass = userPass;
-  }
+    public String getCity() {
+        return city;
+    }
 
-  public List<Role> getRoleList() {
-    return roleList;
-  }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-  public void setRoleList(List<Role> roleList) {
-    this.roleList = roleList;
-  }
+    public Integer getZip() {
+        return zip;
+    }
 
-  public void addRole(Role userRole) {
-    roleList.add(userRole);
-  }
+    public void setZip(Integer zip) {
+        this.zip = zip;
+    }
 
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean verifyPassword(String checkPassword) {
+        return BCrypt.checkpw(checkPassword, this.password);
+    }
 }

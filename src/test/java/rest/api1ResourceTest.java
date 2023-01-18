@@ -1,6 +1,5 @@
 package rest;
 
-import entities.Role;
 import entities.User;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
