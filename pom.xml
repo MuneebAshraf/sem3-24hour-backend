@@ -136,7 +136,6 @@
                     <update>true</update>
                 </configuration>
             </plugin>
-
             <!--This is used to enable @BeforeAll etc used in jUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
