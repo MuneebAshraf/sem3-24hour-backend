@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 @Path("dog")
 public class DogResource {

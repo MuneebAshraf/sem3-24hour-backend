@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dat.sem3</groupId>
-    <artifactId>sem3-24exam-backend</artifactId>
+    <artifactId>WalkieDoggie</artifactId>
     <version>1.0.1</version>
     <packaging>war</packaging>
 
-    <name>sem3-24exam-backend</name>
+    <name>WalkieDoggie</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

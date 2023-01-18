@@ -1,4 +1,4 @@
-# sem3-24exam-backend
+# WalkieDoggie
 
 ### Getting Started
 

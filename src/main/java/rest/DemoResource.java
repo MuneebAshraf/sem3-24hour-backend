@@ -19,7 +19,7 @@ import security.Permission;
 import utils.EMF_Creator;
 
 /**
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 @Path("info")
 public class DemoResource {

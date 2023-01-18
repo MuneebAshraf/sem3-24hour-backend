@@ -2,7 +2,7 @@ package errorhandling;
 
 /**
  *
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 public class NotFoundException extends Exception {
 

@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 @Path("user")
 public class UserResource {

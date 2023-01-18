@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 public class UserFacade {
 

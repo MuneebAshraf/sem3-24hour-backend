@@ -2,7 +2,7 @@ package security.errorhandling;
 
 /**
  *
- * @author lam@cphbusiness.dk
+ * @author cph-ma670
  */
 public class AuthenticationException extends Exception{
 
