@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
+import facades.Populator;
 import security.Permission;
 import utils.EMF_Creator;
 
@@ -70,4 +71,14 @@ public class DemoResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("populate")
+    public String populateWithUsers() {
+        boolean isPopulated = Populator.populate();
+
+        return "{\"msg\": \"Populating db with users. Succes: " +  isPopulated + "\"}";
+    }
+
 }

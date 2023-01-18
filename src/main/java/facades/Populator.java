@@ -14,16 +14,17 @@ import javax.persistence.EntityManagerFactory;
  * @author cph-ma670
  */
 public class Populator {
-    public static void populate(){
-        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-        UserFacade USER_FACADE = UserFacade.getInstance(emf);
-        USER_FACADE.createUser("owner", "test", "Test", "Owner", "Teststreet", 1234, "Testcity", "OWNER");
-        USER_FACADE.createUser("admin", "test", "Test", "Admin", "Teststreet", 1234, "Testcity", "ADMIN");
-        USER_FACADE.createUser("walker", "test", "Test", "Walker", "Teststreet", 1234, "Testcity", "WALKER");
-
-    }
-    
-    public static void main(String[] args) {
-        populate();
+    public static boolean populate(){
+        try {
+            EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+            UserFacade USER_FACADE = UserFacade.getInstance(emf);
+            USER_FACADE.createUser("owner", "test", "Test", "Owner", "Teststreet", 1234, "Testcity", "OWNER");
+            USER_FACADE.createUser("admin", "test", "Test", "Admin", "Teststreet", 1234, "Testcity", "ADMIN");
+            USER_FACADE.createUser("walker", "test", "Test", "Walker", "Teststreet", 1234, "Testcity", "WALKER");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
