@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.DogDTO;
+import dtos.UserDTO;
 import entities.Dog;
 import entities.User;
 import io.restassured.RestAssured;
@@ -38,7 +39,7 @@ class dogResourceTest {
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
     private  Dog dog1, dog2, dog3, dog4;
-    private User user;
+    private User user, admin;
     private static String securityToken;
 
 
@@ -93,14 +94,15 @@ class dogResourceTest {
             //create a user
             user = new User("owner", "test", "Test", "Owner", "Teststreet", 1234, "Testcity", "OWNER");
             em.persist(user);
-            em.persist(new User("admin", "test", "Test", "Admin", "Teststreet", 1234, "Testcity", "ADMIN"));
+            admin =(new User("admin", "test", "Test", "Admin", "Teststreet", 1234, "Testcity", "ADMIN"));
+            em.persist(admin);
             em.persist(new User("walker", "test", "Test", "Walker", "Teststreet", 1234, "Testcity", "WALKER"));
 
 
-            dog1 = new Dog("Doggy", "Poodle", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now());
-            dog2 = new Dog("Doggy2", "Labrador", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now());
-            dog3 = new Dog("Doggy2", "Golden", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now());
-            dog4 = new Dog("Doggy2", "Pitbull", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now());
+            dog1 = new Dog("Doggy", "Poodle", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
+            dog2 = new Dog("Doggy2", "Labrador", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
+            dog3 = new Dog("Doggy2", "Golden", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
+            dog4 = new Dog("Doggy2", "Pitbull", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
 
             //persist all dogs
             em.persist(dog1);
@@ -151,7 +153,7 @@ class dogResourceTest {
     @Test
     void createDog() {
         //create a new user user object
-        Dog dog = new Dog("newDoggo", "testBreed", "https://images.dog.ceo/breeds/poodle-toy/n021136", "Female", LocalDateTime.now());
+        Dog dog = new Dog("newDoggo", "testBreed", "https://images.dog.ceo/breeds/poodle-toy/n021136", "Female", LocalDateTime.now(), admin.getId());
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime()).setPrettyPrinting().create();
         String dogDTO = gson.toJson((new DogDTO(dog)));
 

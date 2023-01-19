@@ -28,7 +28,7 @@ public class Dog {
     @Column(name = "birthdate")
     private LocalDateTime birthdate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User_id")
     private User user;
 
@@ -41,23 +41,6 @@ public class Dog {
     public Dog() {
     }
 
-    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate) {
-        this.name = name;
-        this.breed = breed;
-        this.image = image;
-        this.gender = gender;
-        this.birthdate = birthdate;
-    }
-
-    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate, User user) {
-        this.name = name;
-        this.breed = breed;
-        this.image = image;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.user = user;
-    }
-
     public Dog(Integer id, String name, String breed, String image, String gender, LocalDateTime birthdate) {
         this.id = id;
         this.name = name;
@@ -67,8 +50,18 @@ public class Dog {
         this.birthdate = birthdate;
     }
 
+    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate,Integer user_id) {
+        this.name = name;
+        this.breed = breed;
+        this.image = image;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        User user = new User();
+        user.setId(user_id);
+        this.user = user;
+    }
+
     public void setDog(Dog dog) {
-        //set all the attributes
         this.id = dog.getId();
         this.name = dog.getName();
         this.breed = dog.getBreed();

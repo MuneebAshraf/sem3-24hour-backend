@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -26,15 +27,20 @@ public class DogFacade {
     }
 
     public List<DogDTO> getAllDogs() {
-        List<Dog> dogsList = executeWithClose(em -> {
-            TypedQuery<Dog> query = em.createQuery("SELECT d FROM Dog d", Dog.class);
-            return query.getResultList();
-        });
+        List<Dog> dogsList = new ArrayList<>();
+        try {
+            dogsList = executeWithClose(em -> {
+                TypedQuery<Dog> query = em.createQuery("SELECT d FROM Dog d", Dog.class);
+                return query.getResultList();
+            });
+        } catch (Exception e) {
+            System.out.println("Error while trying to fetch all dogs: " + e.getMessage());
+        }
         return DogDTO.listToDTOs(dogsList);
     }
 
-    public DogDTO create(String name, String breed, String image, String gender, LocalDateTime birthdate) {
-        Dog dog = new Dog(name, breed, image, gender, birthdate);
+    public DogDTO create(String name, String breed, String image, String gender, LocalDateTime birthdate,Integer user_id) {
+        Dog dog = new Dog(name, breed, image, gender, birthdate, user_id);
         executeInsideTransaction(em -> em.persist(dog));
         return new DogDTO(dog);
     }

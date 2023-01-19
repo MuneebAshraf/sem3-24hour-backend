@@ -59,6 +59,10 @@ public class User {
     //emptry constructor
     public User() {
     }
+    //get user
+    public User getUser() {
+        return this;
+    }
 
     public Set<Dog> getDogs() {
         return dogs;

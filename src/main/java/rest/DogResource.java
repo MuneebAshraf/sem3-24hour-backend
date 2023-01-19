@@ -69,7 +69,7 @@ public class DogResource {
         }
 
         try {
-            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, birthdate);
+            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, birthdate, 1);
             return Response.ok(GSON.toJson(dogDTO)).build();
 
         } catch (Exception ex) {

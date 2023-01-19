@@ -1,6 +1,5 @@
 package rest;
 
-import com.google.gson.Gson;
 import entities.User;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -15,7 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
-import facades.Populator;
+import utils.Populator;
 import security.Permission;
 import utils.EMF_Creator;
 
