@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@NamedQuery(name = "User.deleteAllRows", query = "DELETE from User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

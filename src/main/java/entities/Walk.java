@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Walks")
+@NamedQuery(name = "Walk.deleteAllRows", query = "DELETE from Walk")
 public class Walk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

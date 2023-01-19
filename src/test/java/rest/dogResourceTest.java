@@ -88,8 +88,8 @@ class dogResourceTest {
             em.getTransaction().begin();
             //Delete existing users and roles to get a "fresh" database
             em.createQuery("delete from Dog").executeUpdate();
-            em.createQuery("delete from Walk").executeUpdate();
             em.createQuery("delete from User").executeUpdate();
+            em.createQuery("delete from Walk").executeUpdate();
 
             //create a user
             user = new User("owner", "test", "Test", "Owner", "Teststreet", 1234, "Testcity", "OWNER");
