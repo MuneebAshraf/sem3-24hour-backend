@@ -28,7 +28,7 @@ public class Dog {
     @Column(name = "birthdate")
     private LocalDateTime birthdate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "User_id")
     private User user;
 

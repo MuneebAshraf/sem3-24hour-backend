@@ -41,7 +41,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Walk> walks = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Set<Dog> dogs = new LinkedHashSet<>();
 
     //constructor and pasword with bcrypt
