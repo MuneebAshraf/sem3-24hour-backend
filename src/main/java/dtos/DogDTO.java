@@ -17,6 +17,10 @@ public class DogDTO {
     private final Integer userId;
 
     public DogDTO(Dog dog) {
+        if (dog.getId() != null) {
+            this.id = dog.getId();
+        }
+
         this.name = dog.getName();
         this.breed = dog.getBreed();
         this.image = dog.getImage();
@@ -28,6 +32,8 @@ public class DogDTO {
         } else {
             this.userId = null;
         }
+
+
     }
 
     public static List<DogDTO> listToDTOs(List<Dog> dogsList) {

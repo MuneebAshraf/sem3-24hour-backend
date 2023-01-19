@@ -18,6 +18,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,23 +54,22 @@ public class DogResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDog(String content) throws API_Exception {
-        String name, breed, image, gender, birthdateAsString;
-        LocalDateTime birthdate;
+        String name, breed, image, gender, birthdate;
         try {
             JsonObject json = JsonParser.parseString(content).getAsJsonObject();
             name = json.get("name").getAsString();
             breed = json.get("breed").getAsString();
             image = json.get("image").getAsString();
             gender = json.get("gender").getAsString();
-            birthdateAsString = json.get("birthdate").getAsString();
-            birthdate = LocalDateTime.parse(birthdateAsString);
+            birthdate = json.get("birthdate").getAsString();
+
 
         } catch (Exception e) {
             throw new API_Exception("Malformed JSON Supplied", 400, e);
         }
 
         try {
-            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, birthdate, 1);
+            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, LocalDateTime.parse(birthdate), 1);
             return Response.ok(GSON.toJson(dogDTO)).build();
 
         } catch (Exception ex) {
@@ -106,8 +106,7 @@ public class DogResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Integer id, String content) throws API_Exception {
-        String name, breed, image, gender;
-        LocalDateTime birthdate;
+        String name, breed, image, gender, birthdate;
         Integer userId;
         try {
             JsonObject json = JsonParser.parseString(content).getAsJsonObject();
@@ -115,11 +114,11 @@ public class DogResource {
             breed = json.get("breed").getAsString();
             image = json.get("image").getAsString();
             gender = json.get("gender").getAsString();
-            birthdate = LocalDateTime.parse(json.get("birthdate").getAsString());
+            birthdate =  json.get("birthdate").getAsString();
             userId = json.get("userId").getAsInt();
 
             //update with new values by id
-            boolean isUpdated = DOG_FACADE.update(id, name, breed, image, gender, birthdate, userId);
+            boolean isUpdated = DOG_FACADE.update(id, name, breed, image, gender, LocalDateTime.parse(birthdate), userId);
             if (isUpdated) {
                 return Response.ok().build();
             } else {

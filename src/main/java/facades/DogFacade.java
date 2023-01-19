@@ -68,8 +68,11 @@ public class DogFacade {
     public boolean update(Integer id, String name, String breed, String image, String gender, LocalDateTime birthdate, Integer userId) {
         //create DOG object with new values
         Dog newDog = new Dog(id, name, breed, image, gender, birthdate);
+
         if (userId != null) {
-            newDog.getUser().setId(userId);
+            User user = new User();
+            user.setId(userId);
+            newDog.setUser(user);
         }
 
         //update insde a transacetion by id

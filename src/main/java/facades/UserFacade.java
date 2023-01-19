@@ -40,7 +40,8 @@ public class UserFacade {
     //getAllUsers
     public List<UserDTO> getAllUsers() {
         List<User> usersList = executeWithClose(em -> {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u where User.roles != 'ADMIN'", User.class);
+            // get all users where roles enum is not equal to "ADMIN"
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.roles != 'ADMIN'", User.class);
             return query.getResultList();
         });
         return UserDTO.listToDTOs(usersList);
