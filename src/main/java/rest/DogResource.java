@@ -69,7 +69,7 @@ public class DogResource {
         }
 
         try {
-            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, LocalDateTime.parse(birthdate), 1);
+            DogDTO dogDTO = DOG_FACADE.create(name, breed, image, gender, LocalDateTime.parse(birthdate));
             return Response.ok(GSON.toJson(dogDTO)).build();
 
         } catch (Exception ex) {
@@ -115,7 +115,7 @@ public class DogResource {
             image = json.get("image").getAsString();
             gender = json.get("gender").getAsString();
             birthdate =  json.get("birthdate").getAsString();
-            userId = json.get("userId").getAsInt();
+            userId = json.get("owner_id").getAsInt();
 
             //update with new values by id
             boolean isUpdated = DOG_FACADE.update(id, name, breed, image, gender, LocalDateTime.parse(birthdate), userId);

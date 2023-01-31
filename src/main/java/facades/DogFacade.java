@@ -39,8 +39,8 @@ public class DogFacade {
         return DogDTO.listToDTOs(dogsList);
     }
 
-    public DogDTO create(String name, String breed, String image, String gender, LocalDateTime birthdate,Integer user_id) {
-        Dog dog = new Dog(name, breed, image, gender, birthdate, user_id);
+    public DogDTO create(String name, String breed, String image, String gender, LocalDateTime birthdate) {
+        Dog dog = new Dog(name, breed, image, gender, birthdate);
         executeInsideTransaction(em -> em.persist(dog));
         return new DogDTO(dog);
     }
@@ -68,10 +68,8 @@ public class DogFacade {
     public boolean update(Integer id, String name, String breed, String image, String gender, LocalDateTime birthdate, Integer userId) {
         //create DOG object with new values
         Dog newDog = new Dog(id, name, breed, image, gender, birthdate);
-
         if (userId != null) {
-            User user = new User();
-            user.setId(userId);
+            User user = executeWithClose(em -> em.find(User.class, userId));
             newDog.setUser(user);
         }
 

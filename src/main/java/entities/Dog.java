@@ -51,15 +51,21 @@ public class Dog {
         this.birthdate = birthdate;
     }
 
-    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate,Integer user_id) {
+    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate, User owner) {
         this.name = name;
         this.breed = breed;
         this.image = image;
         this.gender = gender;
         this.birthdate = birthdate;
-        User user = new User();
-        user.setId(user_id);
-        this.user = user;
+        this.user = owner;
+    }
+
+    public Dog(String name, String breed, String image, String gender, LocalDateTime birthdate) {
+        this.name = name;
+        this.breed = breed;
+        this.image = image;
+        this.gender = gender;
+        this.birthdate = birthdate;
     }
 
     public void setDog(Dog dog) {

@@ -34,10 +34,10 @@ public class Populator {
             USER_FACADE.createUser("owner", "test", "Test", "Owner", "Teststreet", 1234, "Testcity", "OWNER");
             USER_FACADE.createUser("walker", "test", "Test", "Walker", "Teststreet", 1234, "Testcity", "WALKER");
 
-            DOG_FACADE.create("Doggy", "Poodle", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now(), admin.getId());
-            DOG_FACADE.create("Doggy2", "Labrador", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now(), admin.getId());
-            DOG_FACADE.create("Doggy2", "Golden", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now(), admin.getId());
-            DOG_FACADE.create("Doggy2", "Pitbull", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now(), admin.getId());
+            DOG_FACADE.create("Doggy", "Poodle", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now());
+            DOG_FACADE.create("Doggy2", "Labrador", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now());
+            DOG_FACADE.create("Doggy2", "Golden", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now());
+            DOG_FACADE.create("Doggy2", "Pitbull", "https://www.pexels.com/da-dk/foto/dyr-hund-sodt-liggende-6568501/", "male", LocalDateTime.now());
             return true;
         } catch (Exception e) {
             e.printStackTrace();

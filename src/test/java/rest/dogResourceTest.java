@@ -99,10 +99,10 @@ class dogResourceTest {
             em.persist(new User("walker", "test", "Test", "Walker", "Teststreet", 1234, "Testcity", "WALKER"));
 
 
-            dog1 = new Dog("Doggy", "Poodle", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
-            dog2 = new Dog("Doggy2", "Labrador", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
-            dog3 = new Dog("Doggy2", "Golden", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
-            dog4 = new Dog("Doggy2", "Pitbull", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin.getId());
+            dog1 = new Dog("Doggy", "Poodle", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin);
+            dog2 = new Dog("Doggy2", "Labrador", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin);
+            dog3 = new Dog("Doggy2", "Golden", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin);
+            dog4 = new Dog("Doggy2", "Pitbull", "https://images.dog.ceo/breeds/poodle-toy/n021136", "male", LocalDateTime.now(), admin);
 
             //persist all dogs
             em.persist(dog1);
@@ -153,7 +153,7 @@ class dogResourceTest {
     @Test
     void createDog() {
         //create a new user user object
-        Dog dog = new Dog("newDoggo", "testBreed", "https://images.dog.ceo/breeds/poodle-toy/n021136", "Female", LocalDateTime.now(), admin.getId());
+        Dog dog = new Dog("newDoggo", "testBreed", "https://images.dog.ceo/breeds/poodle-toy/n021136", "Female", LocalDateTime.now(), admin);
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime()).setPrettyPrinting().create();
         String dogDTO = gson.toJson((new DogDTO(dog)));
 
